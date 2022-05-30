@@ -1,0 +1,39 @@
+server:
+  port: 8000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://localhost:3306/bbs?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 123
+      filters: config
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+
+
+oss:
+  qiniu:
+    domain: http://cnpolaris.top
+    accessKey: 86RZV7vDKQ4XMj2hO2Ngbs36c_4KjVi5_2PU6WKf
+    secretKey: IwPsM9nN6t86dBG-TsMBYSV5reETZOH44-9x_vRD
+    bucket: out-polaris
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.polaris.bbs.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.polaris: debug
+
+jwt:
+  tokenHeader: Authorization
+  secret: bbs-secret
+  expiration: 604800
+  tokenHead: 'Bearer '
