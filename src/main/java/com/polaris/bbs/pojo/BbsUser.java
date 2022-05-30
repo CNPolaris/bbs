@@ -1,8 +1,9 @@
 package com.polaris.bbs.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,7 +41,7 @@ public class BbsUser implements Serializable {
 
     private Integer status;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }
