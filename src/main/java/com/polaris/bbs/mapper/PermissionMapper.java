@@ -1,16 +1,16 @@
 package com.polaris.bbs.mapper;
 
-import com.polaris.bbs.pojo.BbsAdmin;
+import com.polaris.bbs.pojo.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 权限表 Mapper 接口
  * </p>
  *
  * @author polaris
  * @since 2022-05-30
  */
-public interface BbsAdminMapper extends BaseMapper<BbsAdmin> {
+public interface PermissionMapper extends BaseMapper<Permission> {
 
 }

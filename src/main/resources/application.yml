@@ -9,6 +9,9 @@ spring:
       username: root
       password: 123
       filters: config
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
   servlet:
     multipart:
       enabled: true
@@ -37,3 +40,23 @@ jwt:
   secret: bbs-secret
   expiration: 604800
   tokenHead: 'Bearer '
+
+secure:
+  ignored:
+    urls: #???????
+      - /swagger-ui.html
+      - /swagger-ui
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /api/bbs/login
+      - /api/bbs/register
+      - /api/bbs/info
+      - /api/bbs/logout

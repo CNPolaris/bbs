@@ -43,5 +43,6 @@ public class BbsUser implements Serializable {
 
     private Date createTime;
 
+    private Long roleId;
 
 }

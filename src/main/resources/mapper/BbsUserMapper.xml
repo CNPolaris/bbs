@@ -11,13 +11,20 @@
         <result column="avatar" property="avatar" />
         <result column="email" property="email" />
         <result column="phone" property="phone" />
+        <result column="role_id" property="roleId" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, user_name, nick_name, password, avatar, email, phone, status, create_time
+        id, user_name, nick_name, password, avatar, email, phone,role_id, status, create_time
     </sql>
-
+    <select id="getPermissionList" parameterType="java.lang.Long" resultType="java.util.List">
+        SELECT * FROM permission
+        WHERE id in (
+            SELECT permission_id FROM role_permission
+            WHERE role_id = #{roleId}
+            )
+    </select>
 </mapper>
