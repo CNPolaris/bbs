@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -57,6 +58,7 @@ public class CommonController {
         user.setNickName(model.getUserName());
         user.setPassword(passwordEncoder.encode(model.getPasswordOne()));
         user.setRoleId(RoleEnum.User.getCode());
+        user.setCreateTime(new Date());
         userService.save(user);
         return RespBean.success("用户注册成功");
     }
