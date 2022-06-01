@@ -1,8 +1,11 @@
 package com.polaris.bbs.service;
 
+import com.polaris.bbs.common.dto.RespBean;
 import com.polaris.bbs.pojo.BbsUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>

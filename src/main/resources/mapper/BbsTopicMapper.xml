@@ -20,4 +20,19 @@
         id, section_id, create_user, reply_count, read_count, title, content_id, status, create_time
     </sql>
 
+    <update id="updateTopic" parameterType="com.polaris.bbs.dto.topic.TopicEdit">
+        update bbs_topic
+        <set>
+            <if test="status !=null">
+                staus = #{status,jdbcType=INTEGER}
+            </if>
+            <if test="sectionId != null">
+                section_id = #{sectionId}
+            </if>
+            <if test="title != null">
+                title = #{title, jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

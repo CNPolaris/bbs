@@ -43,7 +43,7 @@ jwt:
 
 secure:
   ignored:
-    urls: #???????
+    urls:
       - /swagger-ui.html
       - /swagger-ui
       - /swagger-resources/**
