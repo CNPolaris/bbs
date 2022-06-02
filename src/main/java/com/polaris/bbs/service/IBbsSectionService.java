@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-05-30
  */
 public interface IBbsSectionService extends IService<BbsSection> {
-
 }

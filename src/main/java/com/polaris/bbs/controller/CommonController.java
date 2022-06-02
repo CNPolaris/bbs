@@ -1,10 +1,12 @@
 package com.polaris.bbs.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.polaris.bbs.common.dto.RespBean;
 import com.polaris.bbs.common.enums.RoleEnum;
 import com.polaris.bbs.common.utils.StringUtils;
 import com.polaris.bbs.dto.user.LoginParam;
+import com.polaris.bbs.dto.user.UserInfoResponse;
 import com.polaris.bbs.dto.user.UserRegisterParam;
 import com.polaris.bbs.pojo.BbsUser;
 import com.polaris.bbs.security.util.JwtTokenUtil;
@@ -18,14 +20,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,6 +84,15 @@ public class CommonController {
         tokenMap.put("tokenHead", tokenHead);
         return RespBean.success("登陆成功", tokenMap);
     }
+
+    @ApiOperation("获取用户信息")
+    @GetMapping("/info")
+    public RespBean getUserInfo(Principal principal){
+        BbsUser user = userService.selectUserByUserName(principal.getName());
+        UserInfoResponse infoResponse = BeanUtil.copyProperties(user, UserInfoResponse.class);
+        return RespBean.success(infoResponse);
+    }
+
     @ApiOperation(value = "普通用户注册")
     @PostMapping("/register")
     public RespBean register(@RequestBody UserRegisterParam model) {
@@ -108,6 +117,7 @@ public class CommonController {
         userService.save(user);
         return RespBean.success("用户注册成功");
     }
+
     @ApiOperation(value = "上传图片")
     @PostMapping("/image/upload")
     public RespBean uploadImage(@RequestBody MultipartFile file) throws IOException {
@@ -125,5 +135,11 @@ public class CommonController {
             e.printStackTrace();
         }
         return RespBean.error("上传失败");
+    }
+
+    @ApiOperation(value = "登出")
+    @PostMapping("/logout")
+    public RespBean logout(Principal principal) {
+        return RespBean.success("注销成功");
     }
 }
