@@ -60,3 +60,5 @@ secure:
       - /api/bbs/register
       - /api/bbs/info
       - /api/bbs/logout
+      - /api/bbs/topic/page
+      - /api/bbs/topic/select/**

@@ -59,25 +59,26 @@ public class BbsTopicServiceImpl extends ServiceImpl<BbsTopicMapper, BbsTopic> i
             bbsTopic.setReplyCount(0);
             bbsTopic.setTitle(model.getTitle());
             bbsTopic.setCreateTime(date);
+            bbsTopic.setContent(model.getContent());
             // 内容
-            BbsContent bbsContent = new BbsContent();
-            bbsContent.setContent(model.getContent());
-            bbsContent.setCreateTime(date);
-            contentService.save(bbsContent);
-
-            bbsTopic.setContentId(bbsContent.getId());
+//            BbsContent bbsContent = new BbsContent();
+//            bbsContent.setContent(model.getContent());
+//            bbsContent.setCreateTime(date);
+//            contentService.save(bbsContent);
+//
+//            bbsTopic.setContentId(bbsContent.getId());
             save(bbsTopic);
             return bbsTopic;
         }
         // id存在，则修改
         else {
             BbsTopic bbsTopic = topicMapper.updateTopic(model);
-            BbsContent bbsContent = contentService.getById(bbsTopic.getContentId());
-            if(model.getContent()!=null){
-                bbsContent.setContent(model.getContent());
-            }
+//            BbsContent bbsContent = contentService.getById(bbsTopic.getContentId());
+//            if(model.getContent()!=null){
+//                bbsContent.setContent(model.getContent());
+//            }
             updateById(bbsTopic);
-            contentService.updateById(bbsContent);
+//            contentService.updateById(bbsContent);
             return bbsTopic;
         }
     }

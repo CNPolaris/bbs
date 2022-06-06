@@ -36,7 +36,7 @@ public class BbsReply implements Serializable {
 
     private String title;
 
-    private Long contentId;
+    private String content;
 
     private Date createTime;
 

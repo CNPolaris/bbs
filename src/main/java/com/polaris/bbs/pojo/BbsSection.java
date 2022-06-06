@@ -36,7 +36,4 @@ public class BbsSection implements Serializable {
 
     private Date createTime;
 
-    private Integer order;
-
-
 }

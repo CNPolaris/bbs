@@ -8,13 +8,13 @@
         <result column="topic_id" property="topicId" />
         <result column="create_user" property="createUser" />
         <result column="title" property="title" />
-        <result column="content_id" property="contentId" />
+        <result column="content" property="content" />
         <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, topic_id, create_user, title, content_id, create_time
+        id, topic_id, create_user, title, content, create_time
     </sql>
 
 </mapper>

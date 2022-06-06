@@ -40,7 +40,7 @@ public class BbsTopic implements Serializable {
 
     private String title;
 
-    private Long contentId;
+    private String content;
 
     private Integer status;
 

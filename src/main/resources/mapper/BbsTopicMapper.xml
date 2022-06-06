@@ -10,14 +10,14 @@
         <result column="reply_count" property="replyCount" />
         <result column="read_count" property="readCount" />
         <result column="title" property="title" />
-        <result column="content_id" property="contentId" />
+        <result column="content" property="content" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, section_id, create_user, reply_count, read_count, title, content_id, status, create_time
+        id, section_id, create_user, reply_count, read_count, title, content, status, create_time
     </sql>
 
     <update id="updateTopic" parameterType="com.polaris.bbs.dto.topic.TopicEdit">
@@ -31,6 +31,9 @@
             </if>
             <if test="title != null">
                 title = #{title, jdbcType=VARCHAR}
+            </if>
+            <if test="content != null">
+                content = #{content}
             </if>
         </set>
         where id = #{id}

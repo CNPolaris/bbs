@@ -1,25 +1,25 @@
 package com.polaris.bbs.controller;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.dto.RespBean;
 import com.polaris.bbs.dto.topic.TopicEdit;
 import com.polaris.bbs.dto.topic.TopicRequestPage;
+import com.polaris.bbs.dto.topic.TopicResponsePage;
 import com.polaris.bbs.pojo.BbsTopic;
 import com.polaris.bbs.pojo.BbsUser;
-import com.polaris.bbs.service.IBbsContentService;
+import com.polaris.bbs.service.IBbsSectionService;
 import com.polaris.bbs.service.IBbsTopicService;
 import com.polaris.bbs.service.IBbsUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -35,11 +35,11 @@ import java.util.HashMap;
 public class BbsTopicController {
     private final IBbsUserService userService;
     private final IBbsTopicService topicService;
-    private final IBbsContentService contentService;
-    public BbsTopicController(IBbsUserService userService, IBbsTopicService topicService, IBbsContentService contentService) {
+    private final IBbsSectionService sectionService;
+    public BbsTopicController(IBbsUserService userService, IBbsTopicService topicService, IBbsSectionService sectionService) {
         this.userService = userService;
         this.topicService = topicService;
-        this.contentService = contentService;
+        this.sectionService = sectionService;
     }
 
 
@@ -49,7 +49,16 @@ public class BbsTopicController {
         Page<BbsTopic> topicPage = topicService.getTopicPage(model);
         HashMap<String, Object> response = new HashMap<>(2);
         response.put("total", topicPage.getTotal());
-        response.put("list", topicPage.getRecords());
+        List<TopicResponsePage> topicList = new ArrayList<TopicResponsePage>(model.getLimit());
+        topicPage.getRecords().forEach(bbsTopic -> {
+            TopicResponsePage topic = BeanUtil.copyProperties(bbsTopic, TopicResponsePage.class);
+            topic.setSection(sectionService.getById(bbsTopic.getSectionId()).getName());
+            BbsUser bbsUser = userService.getById(bbsTopic.getCreateUser());
+            topic.setNickName(bbsUser.getNickName());
+            topic.setAvatar(bbsUser.getAvatar());
+            topicList.add(topic);
+        });
+        response.put("list", topicList);
         return RespBean.success("分页查询帖子成功", response);
     }
 
@@ -59,5 +68,17 @@ public class BbsTopicController {
         BbsUser bbsUser = userService.selectUserByUserName(principal.getName());
         BbsTopic bbsTopic = topicService.editTopic(bbsUser.getId(), model);
         return RespBean.success(bbsTopic);
+    }
+
+    @ApiOperation("查看详情")
+    @GetMapping("/select/{id}")
+    public RespBean selectTopic(@PathVariable Long id){
+        BbsTopic bbsTopic = topicService.getById(id);
+        TopicResponsePage topicResponse = BeanUtil.copyProperties(bbsTopic, TopicResponsePage.class);
+        topicResponse.setSection(sectionService.getById(bbsTopic.getSectionId()).getName());
+        BbsUser bbsUser = userService.getById(bbsTopic.getCreateUser());
+        topicResponse.setNickName(bbsUser.getNickName());
+
+        return RespBean.success(topicResponse);
     }
 }
