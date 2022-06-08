@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author polaris
- * @since 2022-05-30
+ * @since 2022-06-08
  */
 @Service
 public class BbsReplyServiceImpl extends ServiceImpl<BbsReplyMapper, BbsReply> implements IBbsReplyService {

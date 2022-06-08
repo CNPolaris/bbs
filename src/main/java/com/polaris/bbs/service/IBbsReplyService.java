@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author polaris
- * @since 2022-05-30
+ * @since 2022-06-08
  */
 public interface IBbsReplyService extends IService<BbsReply> {
 
