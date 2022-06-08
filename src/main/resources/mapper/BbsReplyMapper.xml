@@ -11,9 +11,6 @@
         <result column="content" property="content" />
         <result column="create_time" property="createTime" />
         <result column="parent_comment_id" property="parentCommentId" />
-        <result column="parent_comment_user_id" property="parentCommentUserId" />
-        <result column="reply_comment_id" property="replyCommentId" />
-        <result column="reply_comment_user_id" property="replyCommentUserId" />
         <result column="comment_level" property="commentLevel" />
         <result column="ip" property="ip" />
         <result column="address" property="address" />
@@ -21,7 +18,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, topic_id, create_user, title, content, create_time, parent_comment_id, parent_comment_user_id, reply_comment_id, reply_comment_user_id, comment_level, ip, address
+        id, topic_id, create_user, title, content, create_time, parent_comment_id, comment_level, ip, address
     </sql>
 
     <select id="selectOneComment" parameterType="com.polaris.bbs.dto.reply.ReplySearchParam" resultType="java.util.List">

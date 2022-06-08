@@ -49,14 +49,10 @@ public class BbsReplyServiceImpl extends ServiceImpl<BbsReplyMapper, BbsReply> i
         {
             bbsReply.setCommentLevel(CommentEnum.ONE.getCode());
             bbsReply.setParentCommentId(null);
-            bbsReply.setParentCommentUserId(null);
         } else {
             // 如果父级评论存在
             bbsReply.setCommentLevel(CommentEnum.TWO.getCode());
             bbsReply.setParentCommentId(model.getParentCommentId());
-            bbsReply.setParentCommentUserId(model.getParentCommentUserId());
-            bbsReply.setReplyCommentId(model.getReplyCommentId());
-            bbsReply.setReplyCommentUserId(model.getReplyCommentUserId());
         }
         save(bbsReply);
         return bbsReply;

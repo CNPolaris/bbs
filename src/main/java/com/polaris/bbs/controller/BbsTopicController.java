@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,9 +65,9 @@ public class BbsTopicController {
 
     @ApiOperation("编辑帖子")
     @PostMapping("/edit")
-    public RespBean createTopic(Principal principal, @RequestBody TopicEdit model) {
+    public RespBean createTopic(Principal principal, @RequestBody TopicEdit model, HttpServletRequest request) {
         BbsUser bbsUser = userService.selectUserByUserName(principal.getName());
-        BbsTopic bbsTopic = topicService.editTopic(bbsUser.getId(), model);
+        BbsTopic bbsTopic = topicService.editTopic(bbsUser.getId(), model, request);
         return RespBean.success(bbsTopic);
     }
 

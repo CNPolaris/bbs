@@ -49,15 +49,6 @@ public class BbsReply implements Serializable {
     @ApiModelProperty(value = "父级评论ID")
     private Long parentCommentId;
 
-    @ApiModelProperty(value = "父级评论的用户ID")
-    private Long parentCommentUserId;
-
-    @ApiModelProperty(value = "被回复的评论id")
-    private Long replyCommentId;
-
-    @ApiModelProperty(value = "被回复的评论的用户ID")
-    private Long replyCommentUserId;
-
     @ApiModelProperty(value = "评论级别")
     private Integer commentLevel;
 

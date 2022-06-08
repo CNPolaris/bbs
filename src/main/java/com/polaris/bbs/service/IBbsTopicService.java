@@ -6,6 +6,8 @@ import com.polaris.bbs.dto.topic.TopicRequestPage;
 import com.polaris.bbs.pojo.BbsTopic;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  *  服务类
@@ -28,5 +30,5 @@ public interface IBbsTopicService extends IService<BbsTopic> {
      * @param model TopicEdit
      * @return BbsTopic
      */
-    BbsTopic editTopic(Long userId,TopicEdit model);
+    BbsTopic editTopic(Long userId, TopicEdit model, HttpServletRequest request);
 }

@@ -3,6 +3,7 @@ package com.polaris.bbs.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.enums.StatusEnum;
+import com.polaris.bbs.common.utils.StringUtils;
 import com.polaris.bbs.dto.topic.TopicEdit;
 import com.polaris.bbs.dto.topic.TopicRequestPage;
 import com.polaris.bbs.pojo.BbsTopic;
@@ -13,6 +14,7 @@ import com.polaris.bbs.service.IBbsTopicService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -46,7 +48,7 @@ public class BbsTopicServiceImpl extends ServiceImpl<BbsTopicMapper, BbsTopic> i
     }
 
     @Override
-    public BbsTopic editTopic(Long userId, TopicEdit model) {
+    public BbsTopic editTopic(Long userId, TopicEdit model, HttpServletRequest request) {
         Date date = new Date();
         // id为空，则新建
         if(model.getId()==null){
@@ -60,13 +62,12 @@ public class BbsTopicServiceImpl extends ServiceImpl<BbsTopicMapper, BbsTopic> i
             bbsTopic.setTitle(model.getTitle());
             bbsTopic.setCreateTime(date);
             bbsTopic.setContent(model.getContent());
-            // 内容
-//            BbsContent bbsContent = new BbsContent();
-//            bbsContent.setContent(model.getContent());
-//            bbsContent.setCreateTime(date);
-//            contentService.save(bbsContent);
-//
-//            bbsTopic.setContentId(bbsContent.getId());
+            // ip信息
+            String ip = StringUtils.getIp(request);
+            String cityInfo = StringUtils.getCityInfo(ip);
+            bbsTopic.setIp(ip);
+            bbsTopic.setAddress(cityInfo);
+
             save(bbsTopic);
             return bbsTopic;
         }

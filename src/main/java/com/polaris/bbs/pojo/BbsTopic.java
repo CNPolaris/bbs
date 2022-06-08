@@ -46,5 +46,7 @@ public class BbsTopic implements Serializable {
 
     private Date createTime;
 
+    private String ip;
 
+    private String address;
 }
