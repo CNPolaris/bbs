@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author polaris
- * @since 2022-05-30
+ * @since 2022-06-08
  */
 public interface BbsReplyMapper extends BaseMapper<BbsReply> {
 
