@@ -24,4 +24,25 @@
         id, topic_id, create_user, title, content, create_time, parent_comment_id, parent_comment_user_id, reply_comment_id, reply_comment_user_id, comment_level, ip, address
     </sql>
 
+    <select id="selectOneComment" parameterType="com.polaris.bbs.dto.reply.ReplySearchParam" resultType="java.util.List">
+        select * from bbs_reply
+        where
+              topic_id = #{topicId}
+            and
+              comment_level = #{commentLevel}
+        order by
+            create_time desc
+    </select>
+
+    <select id="selectTwoComment" parameterType="com.polaris.bbs.dto.reply.ReplySearchParam" resultType="java.util.List">
+        select * from bbs_reply
+        where
+              parent_comment_id = #{parentCommentId}
+            and
+              topic_id = #{topicId}
+            and
+              comment_level = #{commentLevel}
+        order by
+            create_time desc
+    </select>
 </mapper>

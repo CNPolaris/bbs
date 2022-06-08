@@ -62,3 +62,4 @@ secure:
       - /api/bbs/logout
       - /api/bbs/topic/page
       - /api/bbs/topic/select/**
+      - /api/bbs/reply/comment/list
