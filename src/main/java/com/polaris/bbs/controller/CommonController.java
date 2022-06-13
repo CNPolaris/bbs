@@ -35,7 +35,7 @@ import java.util.Objects;
  * @author CNPolaris
  * @version 1.0
  */
-@RestController
+@RestController("CommonController")
 @RequestMapping("/api/bbs")
 @Api(tags="通用模块")
 public class CommonController {

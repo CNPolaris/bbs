@@ -1,4 +1,4 @@
-package com.polaris.bbs.controller;
+package com.polaris.bbs.controller.user;
 
 
 import cn.hutool.core.bean.BeanUtil;
@@ -30,8 +30,8 @@ import java.util.List;
  * @author polaris
  * @since 2022-05-30
  */
-@Api(tags="帖子管理模块")
-@RestController
+@Api(tags={"用户端","文章模块"})
+@RestController("UserTopicController")
 @RequestMapping("/api/bbs/topic")
 public class BbsTopicController {
     private final IBbsUserService userService;

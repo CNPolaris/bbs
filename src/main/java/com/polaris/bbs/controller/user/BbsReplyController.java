@@ -1,4 +1,4 @@
-package com.polaris.bbs.controller;
+package com.polaris.bbs.controller.user;
 
 
 import cn.hutool.core.bean.BeanUtil;
@@ -11,6 +11,7 @@ import com.polaris.bbs.pojo.BbsReply;
 import com.polaris.bbs.pojo.BbsUser;
 import com.polaris.bbs.service.IBbsReplyService;
 import com.polaris.bbs.service.IBbsUserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,8 @@ import java.util.Map;
  * @author polaris
  * @since 2022-05-30
  */
-@RestController
+@Api(tags = {"用户端", "评论模块"})
+@RestController("UserReplyController")
 @RequestMapping("/api/bbs/reply")
 public class BbsReplyController {
     private final IBbsUserService userService;
