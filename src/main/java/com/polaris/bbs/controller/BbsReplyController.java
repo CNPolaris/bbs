@@ -85,4 +85,23 @@ public class BbsReplyController {
         map.put("list", responses);
         return RespBean.success(map);
     }
+
+    @ApiOperation("展开获取更多评论")
+    @PostMapping("/comment/more")
+    public RespBean getMoreCommentList(@RequestBody ReplySearchParam model) {
+        // 更多的二级评论
+        Page<BbsReply> twoCommentList = replyService.selectTwoCommentList(model);
+        if(twoCommentList.getRecords().size() == 0) {
+            return RespBean.error("评论到底了！");
+        }
+        List<ReplyFloor> twoList = new ArrayList<>();
+        twoCommentList.getRecords().forEach(comment -> {
+            ReplyFloor two = BeanUtil.copyProperties(comment, ReplyFloor.class);
+            BbsUser twoUser = userService.getById(comment.getCreateUser());
+            two.setAvatar(twoUser.getAvatar());
+            two.setNickName(twoUser.getNickName());
+            twoList.add(two);
+        });
+        return RespBean.success(twoList);
+    }
 }
