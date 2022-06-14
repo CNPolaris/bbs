@@ -2,6 +2,7 @@ package com.polaris.bbs.controller.user;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.dto.RespBean;
 import com.polaris.bbs.dto.topic.TopicEdit;
@@ -74,7 +75,13 @@ public class BbsTopicController {
     @ApiOperation("查看详情")
     @GetMapping("/select/{id}")
     public RespBean selectTopic(@PathVariable Long id){
+        // 查找文章
         BbsTopic bbsTopic = topicService.getById(id);
+        // 增加阅读次数
+        Integer readCount = bbsTopic.getReadCount() + 1;
+        bbsTopic.setReadCount(readCount);
+        topicService.updateById(bbsTopic);
+
         TopicResponsePage topicResponse = BeanUtil.copyProperties(bbsTopic, TopicResponsePage.class);
         topicResponse.setSection(sectionService.getById(bbsTopic.getSectionId()).getName());
         BbsUser bbsUser = userService.getById(bbsTopic.getCreateUser());

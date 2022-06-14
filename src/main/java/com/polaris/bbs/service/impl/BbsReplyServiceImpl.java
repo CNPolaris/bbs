@@ -7,8 +7,10 @@ import com.polaris.bbs.common.utils.StringUtils;
 import com.polaris.bbs.dto.reply.ReplySearchParam;
 import com.polaris.bbs.pojo.BbsReply;
 import com.polaris.bbs.mapper.BbsReplyMapper;
+import com.polaris.bbs.pojo.BbsTopic;
 import com.polaris.bbs.service.IBbsReplyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.polaris.bbs.service.IBbsTopicService;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +27,11 @@ import java.util.Date;
 @Service
 public class BbsReplyServiceImpl extends ServiceImpl<BbsReplyMapper, BbsReply> implements IBbsReplyService {
     private final BbsReplyMapper replyMapper;
+    private final IBbsTopicService topicService;
 
-    public BbsReplyServiceImpl(BbsReplyMapper replyMapper) {
+    public BbsReplyServiceImpl(BbsReplyMapper replyMapper, IBbsTopicService topicService) {
         this.replyMapper = replyMapper;
+        this.topicService = topicService;
     }
 
     @Override
@@ -44,6 +48,11 @@ public class BbsReplyServiceImpl extends ServiceImpl<BbsReplyMapper, BbsReply> i
         bbsReply.setTopicId(model.getTopicId());
         bbsReply.setTitle(model.getTitle());
         bbsReply.setCreateTime(new Date());
+        // 增加评论数量
+        BbsTopic topic = topicService.getById(model.getTopicId());
+        Integer replyCount = topic.getReplyCount() + 1;
+        topic.setReplyCount(replyCount);
+        topicService.updateById(topic);
         // 如果父级评论不存在
         if(model.getParentCommentId()==null)
         {
