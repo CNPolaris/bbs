@@ -2,7 +2,6 @@ package com.polaris.bbs.controller.user;
 
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.dto.RespBean;
 import com.polaris.bbs.dto.topic.TopicEdit;
@@ -15,6 +14,8 @@ import com.polaris.bbs.service.IBbsTopicService;
 import com.polaris.bbs.service.IBbsUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +36,7 @@ import java.util.List;
 @RestController("UserTopicController")
 @RequestMapping("/api/bbs/topic")
 public class BbsTopicController {
+    private static final Logger logger = LoggerFactory.getLogger(BbsTopicController.class);
     private final IBbsUserService userService;
     private final IBbsTopicService topicService;
     private final IBbsSectionService sectionService;
@@ -69,6 +71,7 @@ public class BbsTopicController {
     public RespBean createTopic(Principal principal, @RequestBody TopicEdit model, HttpServletRequest request) {
         BbsUser bbsUser = userService.selectUserByUserName(principal.getName());
         BbsTopic bbsTopic = topicService.editTopic(bbsUser.getId(), model, request);
+        logger.info("用户：{}编辑了文章",principal.getName());
         return RespBean.success(bbsTopic);
     }
 
