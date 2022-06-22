@@ -10,6 +10,7 @@ import com.polaris.bbs.dto.user.UserInfoResponse;
 import com.polaris.bbs.dto.user.UserRegisterParam;
 import com.polaris.bbs.pojo.BbsUser;
 import com.polaris.bbs.security.util.JwtTokenUtil;
+import com.polaris.bbs.service.IBbsSectionService;
 import com.polaris.bbs.service.IBbsUserService;
 import com.polaris.bbs.service.OssAdminService;
 import io.swagger.annotations.Api;
@@ -42,12 +43,14 @@ public class CommonController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
     private final IBbsUserService userService;
+    private final IBbsSectionService sectionService;
     private final PasswordEncoder passwordEncoder;
     private final OssAdminService ossAdminService;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
-    public CommonController(IBbsUserService userService, PasswordEncoder passwordEncoder, OssAdminService ossAdminService, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
+    public CommonController(IBbsUserService userService, IBbsSectionService sectionService, PasswordEncoder passwordEncoder, OssAdminService ossAdminService, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
         this.userService = userService;
+        this.sectionService = sectionService;
         this.passwordEncoder = passwordEncoder;
         this.ossAdminService = ossAdminService;
         this.jwtTokenUtil = jwtTokenUtil;
@@ -141,5 +144,11 @@ public class CommonController {
     @PostMapping("/logout")
     public RespBean logout(Principal principal) {
         return RespBean.success("注销成功");
+    }
+
+    @ApiOperation(value = "获取全部的话题标签列表")
+    @GetMapping("/section/all")
+    public RespBean getSectionAllList() {
+        return RespBean.success(sectionService.getSectionAllList());
     }
 }
