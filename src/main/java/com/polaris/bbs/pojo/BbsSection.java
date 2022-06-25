@@ -32,6 +32,8 @@ public class BbsSection implements Serializable {
 
     private String name;
 
+    private Integer type;
+
     private Integer status;
 
     private Date createTime;

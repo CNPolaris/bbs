@@ -3,8 +3,9 @@ package com.polaris.bbs.pojo;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,7 +40,7 @@ public class BbsAnswer implements Serializable {
     private String content;
 
     @ApiModelProperty(value = "回答时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }
