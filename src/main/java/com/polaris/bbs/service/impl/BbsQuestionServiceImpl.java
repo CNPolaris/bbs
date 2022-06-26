@@ -2,6 +2,7 @@ package com.polaris.bbs.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.polaris.bbs.common.enums.StatusEnum;
 import com.polaris.bbs.dto.question.QuestionPage;
 import com.polaris.bbs.pojo.BbsQuestion;
 import com.polaris.bbs.mapper.BbsQuestionMapper;
@@ -40,12 +41,19 @@ public class BbsQuestionServiceImpl extends ServiceImpl<BbsQuestionMapper, BbsQu
             bbsQuestion.setTitle(model.getTitle());
             bbsQuestion.setContent(model.getContent());
             bbsQuestion.setCreateTime(new Date());
+            // 状态信息初始化
+            bbsQuestion.setReadCount(0);
+            bbsQuestion.setReplyCount(0);
+            bbsQuestion.setAnswerCount(0);
+            bbsQuestion.setStatus(StatusEnum.OK.getCode());
             save(bbsQuestion);
             return bbsQuestion;
         } else {
             BbsQuestion question = getById(model.getId());
             question.setTitle(model.getTitle());
             question.setContent(model.getContent());
+            question.setStatus(model.getStatus());
+            question.setSectionId(model.getSectionId());
             updateById(question);
             return question;
         }
@@ -60,6 +68,8 @@ public class BbsQuestionServiceImpl extends ServiceImpl<BbsQuestionMapper, BbsQu
             queryWrapper.eq("section_id", model.getSectionId());
         } else if(model.getTitle()!=null){
             queryWrapper.eq("title", model.getTitle());
+        } else if(model.getStatus()!=null) {
+            queryWrapper.eq("status", model.getStatus());
         }
         return questionMapper.selectPage(page, queryWrapper.orderByDesc("create_time"));
     }
