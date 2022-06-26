@@ -55,5 +55,6 @@ public class BbsQuestion implements Serializable {
     @ApiModelProperty(value = "内容")
     private String content;
 
-
+    @ApiModelProperty(value = "有效状态")
+    private Integer status;
 }

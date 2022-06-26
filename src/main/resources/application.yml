@@ -65,3 +65,5 @@ secure:
       - /api/bbs/reply/comment/list
       - /api/bbs/reply/comment/more
       - /api/bbs/section/all
+      - /api/bbs/question/page
+      - /api/bbs/question/select/**

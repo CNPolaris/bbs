@@ -42,5 +42,6 @@ public class BbsAnswer implements Serializable {
     @ApiModelProperty(value = "回答时间")
     private Date createTime;
 
-
+    @ApiModelProperty(value = "有效状态")
+    private Integer status;
 }
