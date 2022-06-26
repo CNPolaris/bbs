@@ -12,4 +12,5 @@ public class QuestionPage {
     private Integer limit;
     private Integer sectionId;
     private String title;
+    private Integer status;
 }

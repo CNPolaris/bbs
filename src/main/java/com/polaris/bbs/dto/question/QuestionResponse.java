@@ -22,6 +22,8 @@ public class QuestionResponse {
 
     private Integer readCount;
 
+    private Integer answerCount;
+
     private String title;
 
     private String content;

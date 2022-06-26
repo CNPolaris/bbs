@@ -93,8 +93,9 @@ public class BbsQuestionController {
         // 问答内容
         QuestionResponse questionResponse = BeanUtil.copyProperties(bbsQuestion, QuestionResponse.class);
         questionResponse.setSection(sectionService.getById(bbsQuestion.getSectionId()).getName());
-        questionResponse.setNickName(userService.getById(bbsQuestion.getCreateUser()).getNickName());
-
+        BbsUser bbsUser = userService.getById(bbsQuestion.getCreateUser());
+        questionResponse.setNickName(bbsUser.getNickName());
+        questionResponse.setAvatar(bbsUser.getAvatar());
         return RespBean.success(questionResponse);
     }
 
