@@ -41,6 +41,7 @@ public class BbsQuestionServiceImpl extends ServiceImpl<BbsQuestionMapper, BbsQu
             bbsQuestion.setTitle(model.getTitle());
             bbsQuestion.setContent(model.getContent());
             bbsQuestion.setCreateTime(new Date());
+            bbsQuestion.setTags(model.getTags());
             // 状态信息初始化
             bbsQuestion.setReadCount(0);
             bbsQuestion.setReplyCount(0);
@@ -54,6 +55,7 @@ public class BbsQuestionServiceImpl extends ServiceImpl<BbsQuestionMapper, BbsQu
             question.setContent(model.getContent());
             question.setStatus(model.getStatus());
             question.setSectionId(model.getSectionId());
+            question.setTags(model.getTags());
             updateById(question);
             return question;
         }

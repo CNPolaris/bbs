@@ -31,4 +31,6 @@ public class QuestionResponse {
     private Integer status;
 
     private Date createTime;
+
+    private String tags;
 }

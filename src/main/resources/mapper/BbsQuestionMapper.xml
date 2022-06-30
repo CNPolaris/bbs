@@ -14,11 +14,12 @@
         <result column="title" property="title" />
         <result column="content" property="content" />
         <result column="status" property="status" />
+        <result column="tags" property="tags" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, section_id, create_user, read_count, reply_count, answer_count, create_time, title, content, status
+        id, section_id, create_user, read_count, reply_count, answer_count, create_time, title, content, status, tags
     </sql>
 
 </mapper>
