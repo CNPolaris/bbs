@@ -4,10 +4,7 @@ package com.polaris.bbs.controller.user;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.dto.RespBean;
-import com.polaris.bbs.dto.question.AnswerResponse;
-import com.polaris.bbs.dto.question.QuestionAnswerPage;
-import com.polaris.bbs.dto.question.QuestionPage;
-import com.polaris.bbs.dto.question.QuestionResponse;
+import com.polaris.bbs.dto.question.*;
 import com.polaris.bbs.pojo.BbsAnswer;
 import com.polaris.bbs.pojo.BbsQuestion;
 import com.polaris.bbs.pojo.BbsUser;
@@ -115,5 +112,38 @@ public class BbsQuestionController {
         });
         response.put("list", answerList);
         return RespBean.success(response);
+    }
+
+    @ApiOperation("用户发表的问答")
+    @PostMapping("/personal/list")
+    public RespBean getPersonalQuestionList(Principal principal, @RequestBody QuestionPage model){
+        Page<BbsQuestion> questionPage = questionService.getPersonalQuestionList(userService.selectUserByUserName(principal.getName()).getId(), model);
+        HashMap<String, Object> response = new HashMap<>(2);
+        response.put("total", questionPage.getTotal());
+        List<QuestionResponse> questionList = new ArrayList<>();
+        questionPage.getRecords().forEach(question -> {
+            QuestionResponse questionResponse = BeanUtil.copyProperties(question, QuestionResponse.class);
+            questionResponse.setSection(sectionService.getById(question.getSectionId()).getName());
+            BbsUser user = userService.getById(question.getCreateUser());
+            questionResponse.setNickName(user.getNickName());
+            questionResponse.setAvatar(user.getAvatar());
+            questionList.add(questionResponse);
+        });
+        response.put("list", questionList);
+        return RespBean.success("查询用户个人创建的问答", response);
+    }
+
+    @ApiOperation("用户删除个人创建的问答")
+    @GetMapping("/personal/delete/{id}")
+    public RespBean deletePersonalQuestion(Principal principal, @PathVariable Long id){
+        int question = questionService.deletePersonalQuestion(userService.selectUserByUserName(principal.getName()).getId(), id);
+        return RespBean.success("删除成功",question);
+    }
+
+    @ApiOperation("设置回答相关状态")
+    @PostMapping("/personal/answer")
+    public RespBean setQuestionAnswerStatus(Principal principal, @RequestBody AnswerRequest model){
+        BbsQuestion question = questionService.setQuestionAnswerStatus(userService.selectUserByUserName(principal.getName()).getId(), model);
+        return RespBean.success(question);
     }
 }

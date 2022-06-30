@@ -21,5 +21,18 @@
     <sql id="Base_Column_List">
         id, section_id, create_user, read_count, reply_count, answer_count, create_time, title, content, status, tags
     </sql>
+    <delete id="deletePersonalQuestionAnswer" parameterType="java.lang.Long">
+        DELETE FROM bbs_answer
+        WHERE question_id = #{questionId}
+    </delete>
 
+    <update id="setPersonalQuestionAnswerStatus" parameterType="com.polaris.bbs.dto.question.AnswerRequest">
+        update bbs_answer
+        <set>
+            <if test="status">
+                status = #{status, jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{answerId} and question_id = #{questionId}
+    </update>
 </mapper>

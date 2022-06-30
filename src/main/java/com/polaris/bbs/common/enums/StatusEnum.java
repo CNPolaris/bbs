@@ -8,8 +8,8 @@ import java.util.Map;
  */
 public enum StatusEnum {
     NO(0, "无效"),
-    OK(1,"有效");
-
+    OK(1,"有效"),
+    WAIT(2, "未知");
     int code;
     String name;
 

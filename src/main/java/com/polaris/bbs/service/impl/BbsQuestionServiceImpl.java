@@ -3,6 +3,7 @@ package com.polaris.bbs.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.enums.StatusEnum;
+import com.polaris.bbs.dto.question.AnswerRequest;
 import com.polaris.bbs.dto.question.QuestionPage;
 import com.polaris.bbs.pojo.BbsQuestion;
 import com.polaris.bbs.mapper.BbsQuestionMapper;
@@ -74,5 +75,42 @@ public class BbsQuestionServiceImpl extends ServiceImpl<BbsQuestionMapper, BbsQu
             queryWrapper.eq("status", model.getStatus());
         }
         return questionMapper.selectPage(page, queryWrapper.orderByDesc("create_time"));
+    }
+
+    @Override
+    public Page<BbsQuestion> getPersonalQuestionList(Long userId, QuestionPage model) {
+        Page<BbsQuestion> page = new Page<>(model.getPage(), model.getLimit());
+        QueryWrapper<BbsQuestion> queryWrapper = new QueryWrapper<>();
+        if(model.getSectionId()!=null){
+            queryWrapper.eq("section_id", model.getSectionId());
+        } else if(model.getTitle()!=null){
+            queryWrapper.eq("title", model.getTitle());
+        } else if(model.getStatus()!=null) {
+            queryWrapper.eq("status", model.getStatus());
+        }
+        return questionMapper.selectPage(page, queryWrapper.orderByDesc("create_time").eq("create_user", userId));
+    }
+
+    @Override
+    public int deletePersonalQuestion(Long userId, Long questionId) {
+        QueryWrapper<BbsQuestion> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("create_user", userId).eq("id", questionId);
+        questionMapper.deletePersonalQuestionAnswer(questionId);
+        return questionMapper.delete(queryWrapper);
+    }
+
+    @Override
+    public BbsQuestion setQuestionAnswerStatus(Long userId, AnswerRequest model) {
+        // 获取问题
+        QueryWrapper<BbsQuestion> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", model.getQuestionId()).eq("create_user", userId);
+        questionMapper.setPersonalQuestionAnswerStatus(model);
+        //如果回答有效则设置问题为已回答
+        BbsQuestion question = questionMapper.selectOne(queryWrapper);
+        if(StatusEnum.OK.getCode() == model.getStatus()){
+            question.setStatus(model.getStatus());
+        }
+        updateById(question);
+        return question;
     }
 }
