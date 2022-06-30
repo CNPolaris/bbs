@@ -20,4 +20,11 @@ public interface IBbsAnswerService extends IService<BbsAnswer> {
      * @return Page<BbsAnswer>
      */
     Page<BbsAnswer> getAnswerPage(QuestionAnswerPage model);
+
+    /**
+     * 编辑问题回答（id存在则更新，否则新建）
+     * @param model BbsAnswer
+     * @return BbsAnswer
+     */
+    BbsAnswer editQuestionAnswer(BbsAnswer model);
 }

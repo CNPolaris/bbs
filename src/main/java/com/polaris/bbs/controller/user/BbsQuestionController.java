@@ -146,4 +146,12 @@ public class BbsQuestionController {
         BbsQuestion question = questionService.setQuestionAnswerStatus(userService.selectUserByUserName(principal.getName()).getId(), model);
         return RespBean.success(question);
     }
+
+    @ApiOperation("回答问题")
+    @PostMapping("/answer/edit")
+    public RespBean editQuestionAnswer(Principal principal, @RequestBody BbsAnswer model){
+        model.setCreateUser(userService.selectUserByUserName(principal.getName()).getId());
+        BbsAnswer bbsAnswer = answerService.editQuestionAnswer(model);
+        return RespBean.success("更新成功", bbsAnswer);
+    }
 }
