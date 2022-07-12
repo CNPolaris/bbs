@@ -22,7 +22,7 @@
         id, section_id, create_user, reply_count, read_count, title, content, status, create_time, ip, address
     </sql>
 
-    <update id="updateTopic" parameterType="com.polaris.bbs.dto.topic.TopicEdit">
+    <update id="updateTopic" parameterType="com.polaris.bbs.dto.editor.topic.TopicEdit">
         update bbs_topic
         <set>
             <if test="status !=null">

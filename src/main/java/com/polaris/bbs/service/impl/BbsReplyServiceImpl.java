@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.enums.CommentEnum;
 import com.polaris.bbs.common.utils.StringUtils;
-import com.polaris.bbs.dto.reply.ReplySearchParam;
+import com.polaris.bbs.dto.editor.reply.ReplySearchParam;
 import com.polaris.bbs.pojo.BbsReply;
 import com.polaris.bbs.mapper.BbsReplyMapper;
 import com.polaris.bbs.pojo.BbsTopic;

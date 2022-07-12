@@ -1,4 +1,4 @@
-package com.polaris.bbs.dto.reply;
+package com.polaris.bbs.dto.editor.reply;
 
 
 import io.swagger.annotations.ApiModel;

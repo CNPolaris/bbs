@@ -1,7 +1,7 @@
 package com.polaris.bbs.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.polaris.bbs.dto.reply.ReplySearchParam;
+import com.polaris.bbs.dto.editor.reply.ReplySearchParam;
 import com.polaris.bbs.pojo.BbsReply;
 import com.baomidou.mybatisplus.extension.service.IService;
 

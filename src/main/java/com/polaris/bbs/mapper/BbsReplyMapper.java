@@ -1,6 +1,6 @@
 package com.polaris.bbs.mapper;
 
-import com.polaris.bbs.dto.reply.ReplySearchParam;
+import com.polaris.bbs.dto.editor.reply.ReplySearchParam;
 import com.polaris.bbs.pojo.BbsReply;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 

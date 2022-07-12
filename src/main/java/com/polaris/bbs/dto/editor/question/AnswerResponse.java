@@ -1,4 +1,4 @@
-package com.polaris.bbs.dto.question;
+package com.polaris.bbs.dto.editor.question;
 
 import lombok.Data;
 

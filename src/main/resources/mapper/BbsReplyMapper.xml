@@ -21,7 +21,7 @@
         id, topic_id, create_user, title, content, create_time, parent_comment_id, comment_level, ip, address
     </sql>
 
-    <select id="selectOneComment" parameterType="com.polaris.bbs.dto.reply.ReplySearchParam" resultType="java.util.List">
+    <select id="selectOneComment" parameterType="com.polaris.bbs.dto.editor.reply.ReplySearchParam" resultType="java.util.List">
         select * from bbs_reply
         where
               topic_id = #{topicId}
@@ -31,7 +31,7 @@
             create_time desc
     </select>
 
-    <select id="selectTwoComment" parameterType="com.polaris.bbs.dto.reply.ReplySearchParam" resultType="java.util.List">
+    <select id="selectTwoComment" parameterType="com.polaris.bbs.dto.editor.reply.ReplySearchParam" resultType="java.util.List">
         select * from bbs_reply
         where
               parent_comment_id = #{parentCommentId}

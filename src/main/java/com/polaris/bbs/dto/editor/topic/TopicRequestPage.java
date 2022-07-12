@@ -1,4 +1,4 @@
-package com.polaris.bbs.dto.question;
+package com.polaris.bbs.dto.editor.topic;
 
 import lombok.Data;
 
@@ -7,10 +7,8 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-public class QuestionPage {
+public class TopicRequestPage {
     private Integer page;
     private Integer limit;
     private Integer sectionId;
-    private String title;
-    private Integer status;
 }

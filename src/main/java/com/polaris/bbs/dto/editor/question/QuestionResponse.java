@@ -1,4 +1,4 @@
-package com.polaris.bbs.dto.topic;
+package com.polaris.bbs.dto.editor.question;
 
 import lombok.Data;
 
@@ -9,16 +9,20 @@ import java.util.Date;
  * @version 1.0
  */
 @Data
-public class TopicEdit {
+public class QuestionResponse {
     private Long id;
 
-    private Long sectionId;
+    private String nickName;
 
-    private Long createUser;
+    private String avatar;
+
+    private String section;
 
     private Integer replyCount;
 
     private Integer readCount;
+
+    private Integer answerCount;
 
     private String title;
 
@@ -27,4 +31,6 @@ public class TopicEdit {
     private Integer status;
 
     private Date createTime;
+
+    private String tags;
 }

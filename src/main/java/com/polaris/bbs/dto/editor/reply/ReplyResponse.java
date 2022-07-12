@@ -1,6 +1,5 @@
-package com.polaris.bbs.dto.reply;
+package com.polaris.bbs.dto.editor.reply;
 
-import com.polaris.bbs.pojo.BbsReply;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

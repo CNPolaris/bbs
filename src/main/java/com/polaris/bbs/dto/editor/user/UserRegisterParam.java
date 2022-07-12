@@ -1,4 +1,4 @@
-package com.polaris.bbs.dto.user;
+package com.polaris.bbs.dto.editor.user;
 
 import lombok.Data;
 

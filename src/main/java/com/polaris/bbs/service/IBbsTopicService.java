@@ -1,8 +1,8 @@
 package com.polaris.bbs.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.polaris.bbs.dto.topic.TopicEdit;
-import com.polaris.bbs.dto.topic.TopicRequestPage;
+import com.polaris.bbs.dto.editor.topic.TopicEdit;
+import com.polaris.bbs.dto.editor.topic.TopicRequestPage;
 import com.polaris.bbs.pojo.BbsTopic;
 import com.baomidou.mybatisplus.extension.service.IService;
 

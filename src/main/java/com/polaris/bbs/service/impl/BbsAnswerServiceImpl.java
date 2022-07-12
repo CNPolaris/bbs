@@ -3,7 +3,7 @@ package com.polaris.bbs.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.polaris.bbs.common.enums.StatusEnum;
-import com.polaris.bbs.dto.question.QuestionAnswerPage;
+import com.polaris.bbs.dto.editor.question.QuestionAnswerPage;
 import com.polaris.bbs.pojo.BbsAnswer;
 import com.polaris.bbs.mapper.BbsAnswerMapper;
 import com.polaris.bbs.service.IBbsAnswerService;

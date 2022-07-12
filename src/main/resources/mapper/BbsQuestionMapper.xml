@@ -26,7 +26,7 @@
         WHERE question_id = #{questionId}
     </delete>
 
-    <update id="setPersonalQuestionAnswerStatus" parameterType="com.polaris.bbs.dto.question.AnswerRequest">
+    <update id="setPersonalQuestionAnswerStatus" parameterType="com.polaris.bbs.dto.editor.question.AnswerRequest">
         update bbs_answer
         <set>
             <if test="status">
