@@ -52,5 +52,5 @@ public class BbsTutor implements Serializable {
     private Date createTime;
 
     @ApiModelProperty(value = "推荐人")
-    private String createUser;
+    private Long createUser;
 }
