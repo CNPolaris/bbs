@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author polaris
@@ -28,13 +28,13 @@ public class BbsTutorServiceImpl extends ServiceImpl<BbsTutorMapper, BbsTutor> i
     @Override
     public BbsTutor editTutor(BbsTutor model) {
         BbsTutor tutor;
-        if(model.getId()!=null){
+        if (model.getId() != null) {
             tutor = getById(model.getId());
             QueryWrapper<BbsTutor> queryWrapper = new QueryWrapper<>(model);
             update(tutor, queryWrapper);
-        }else{
+        } else {
             tutor = new BbsTutor();
-            saveOrUpdate(tutor,new QueryWrapper<>(model));
+            saveOrUpdate(tutor, new QueryWrapper<>(model));
         }
         return tutor;
     }
@@ -43,9 +43,15 @@ public class BbsTutorServiceImpl extends ServiceImpl<BbsTutorMapper, BbsTutor> i
     public Page<BbsTutor> getUserCreateTutorList(Long userId, TutorPageQuery model) {
         Page<BbsTutor> page = new Page<>(model.getPage(), model.getLimit());
         QueryWrapper<BbsTutor> queryWrapper = new QueryWrapper<>();
-        if(model.getName()!=null){
+        if (model.getName() != null) {
             queryWrapper.eq("name", model.getName());
         }
         return tutorMapper.selectPage(page, queryWrapper.eq("create_user", userId).orderByDesc("create_time"));
+    }
+
+    @Override
+    public void userDeleteTutor(Long userId, Long tutorId) {
+        QueryWrapper<BbsTutor> queryWrapper = new QueryWrapper<>();
+        tutorMapper.delete(queryWrapper.eq("id", tutorId).eq("create_user", userId));
     }
 }

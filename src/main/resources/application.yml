@@ -67,3 +67,4 @@ secure:
       - /api/bbs/section/all
       - /api/bbs/question/page
       - /api/bbs/question/select/**
+      - /api/bbs/tutor/select/**

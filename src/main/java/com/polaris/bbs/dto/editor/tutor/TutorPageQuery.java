@@ -12,4 +12,5 @@ public class TutorPageQuery {
     private Integer limit;
     private String name;
     private Integer status;
+    private Long tutorId;
 }

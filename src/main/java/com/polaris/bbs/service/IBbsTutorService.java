@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author polaris
@@ -17,6 +17,7 @@ public interface IBbsTutorService extends IService<BbsTutor> {
     /**
      * 编辑或新建导师推荐信息
      * id存在则更新 id不存在则新建
+     * 
      * @param model BbsTutor
      * @return BbsTutor
      */
@@ -24,9 +25,18 @@ public interface IBbsTutorService extends IService<BbsTutor> {
 
     /**
      * 用户获取个人发布的导师推荐信息
+     * 
      * @param userId Long
-     * @param model TutorPageQuery
-     * @return  Page<BbsTutor>
+     * @param model  TutorPageQuery
+     * @return Page<BbsTutor>
      */
     Page<BbsTutor> getUserCreateTutorList(Long userId, TutorPageQuery model);
+
+    /**
+     * 用户删除个人发布的导师推荐信息
+     * 
+     * @param userId  Long
+     * @param tutorId Long
+     */
+    void userDeleteTutor(Long userId, Long tutorId);
 }
